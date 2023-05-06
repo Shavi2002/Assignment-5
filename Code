@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head>
+    <title>
+      My jQuery slideshow
+    </title>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script>
+      var currentSlide = 0;
+      var numSlides = 5;
+
+      var start = function(){
+        goToCurrentSlide();
+      }
+      
+      var goToCurrentSlide = function(){
+        $("img").fadeOut(500);
+        $("img:eq(" + currentSlide + ")").fadeIn(500);
+      }
+
+      var goPrev = function(){
+        currentSlide = (currentSlide - 1 + numSlides) % numSlides;
+        goToCurrentSlide();
+        return;
+      }
+
+      var goNext = function(){
+        currentSlide = (currentSlide + 1) % numSlides;
+        goToCurrentSlide();
+        return;
+      }
+
+      $(document).ready(function(){
+        start();
+        setInterval(goNext, 3000);
+        $("#prev").click(goPrev);
+        $("#next").click(goNext);
+      });
+     </script>
+     <style>
+      img{
+        position: absolute;
+      }
+      #prev{
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+      }
+      #next{
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+      }
+     </style>
+  </head>
+
+  <body>
+    <img src="https://images.unsplash.com/photo-1601979031925-424e53b6caaa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHVwcHl8ZW58MHx8MHx8&w=1000&q=80" />
+    <img src="https://cdn.pixabay.com/photo/2017/09/25/13/12/puppy-2785074__480.jpg" />
+    <img src="https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313__480.jpg" />
+    <img src="https://cdn.pixabay.com/photo/2015/06/08/15/02/pug-802522__480.jpg" />
+    <img src="https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313__480.jpg" />
+    <button id="prev">Prev</button>
+    <button id="next">Next</button>
+  </body>
+</html>
